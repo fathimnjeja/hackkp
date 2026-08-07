@@ -1,0 +1,656 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ECHO-X | AI Digital Investigation Command Center</title>
+  
+  <!-- Google Fonts: Inter & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Cyber Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+
+  <!-- Particle & Cyber Grid Background Canvas -->
+  <canvas id="bg-canvas"></canvas>
+  <div class="scanline-overlay"></div>
+
+  <!-- App Shell -->
+  <div id="app-shell">
+
+    <!-- Top Command Center Navigation Bar -->
+    <header class="hud-navbar">
+      <div class="brand-logo" data-view="landing">
+        <div class="logo-icon">
+          <i class="fa-solid fa-brain"></i>
+        </div>
+        <div class="brand-text">
+          <h1>ECHO-X</h1>
+          <span>AI INVESTIGATION PLATFORM</span>
+        </div>
+      </div>
+
+      <div class="nav-controls">
+        <div class="search-box">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" placeholder="Search cases, evidence, suspect alias, phone numbers...">
+        </div>
+
+        <div class="system-pulse">
+          <div class="pulse-dot"></div>
+          <span>AI CORE ACTIVE • 8 AGENTS</span>
+        </div>
+
+        <div class="officer-badge">
+          <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80" alt="Officer Avatar" class="officer-avatar">
+          <div class="officer-info">
+            <div>Det. Inspector Arjun</div>
+            <span>BADGE #9982-CYBER</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Layout Body -->
+    <div class="layout-body">
+
+      <!-- Left Sidebar Navigation -->
+      <nav class="hud-sidebar">
+        <a class="nav-item" data-view="landing">
+          <i class="fa-solid fa-house"></i>
+          <span>Home</span>
+        </a>
+        <a class="nav-item active" data-view="dashboard">
+          <i class="fa-solid fa-gauge-high"></i>
+          <span>Dashboard</span>
+        </a>
+        <a class="nav-item" data-view="new-investigation">
+          <i class="fa-solid fa-folder-plus"></i>
+          <span>New Investigation</span>
+        </a>
+        <a class="nav-item" data-view="upload-evidence">
+          <i class="fa-solid fa-cloud-arrow-up"></i>
+          <span>Upload Evidence</span>
+        </a>
+        <a class="nav-item" data-view="investigation-center">
+          <i class="fa-solid fa-microscope"></i>
+          <span>Investigation Center</span>
+        </a>
+        <a class="nav-item" data-view="ai-reasoning">
+          <i class="fa-solid fa-diagram-project"></i>
+          <span>AI Reasoning</span>
+        </a>
+        <a class="nav-item" data-view="evidence-graph">
+          <i class="fa-solid fa-circle-nodes"></i>
+          <span>Evidence Graph</span>
+        </a>
+        <a class="nav-item" data-view="timeline">
+          <i class="fa-solid fa-timeline"></i>
+          <span>Timeline</span>
+        </a>
+        <a class="nav-item" data-view="reports">
+          <i class="fa-solid fa-file-pdf"></i>
+          <span>Reports</span>
+        </a>
+        <a class="nav-item" data-view="alerts">
+          <i class="fa-solid fa-triangle-exclamation"></i>
+          <span>Alerts</span>
+          <span class="badge">4</span>
+        </a>
+
+        <div class="nav-divider"></div>
+
+        <a class="nav-item" data-view="login">
+          <i class="fa-solid fa-shield-halved"></i>
+          <span>Login / Auth</span>
+        </a>
+        <a class="nav-item" data-view="settings">
+          <i class="fa-solid fa-gear"></i>
+          <span>Settings</span>
+        </a>
+
+        <div class="sidebar-footer">
+          <div class="status-row">
+            <span>DATABASE</span>
+            <span style="color:var(--status-green)">ONLINE</span>
+          </div>
+          <div class="status-row">
+            <span>LATENCY</span>
+            <span style="color:var(--neon-cyan)">12ms</span>
+          </div>
+        </div>
+      </nav>
+
+      <!-- View Viewport -->
+      <main class="view-viewport">
+
+        <!-- ================= PAGE 1: LANDING PAGE ================= -->
+        <section id="page-landing" class="page-view">
+          <div class="landing-hero">
+            <div class="hero-content">
+              <div class="hero-badge">
+                <i class="fa-solid fa-shield-cat"></i> POLICE AI COMMAND PLATFORM v2.4
+              </div>
+              <h1 class="hero-title">
+                Every Clue Speaks.<br>
+                <span>ECHO-X Makes AI Listen.</span>
+              </h1>
+              <p class="hero-sub">
+                Autonomous multi-agent digital investigation suite. Reconstruct crime scenes, correlate wiretaps & chat logs, predict suspect movement, and synthesize bulletproof legal evidence.
+              </p>
+              <div style="display:flex; gap:16px;">
+                <button class="btn-cyber" data-view="dashboard">
+                  <i class="fa-solid fa-play"></i> Start Investigation
+                </button>
+                <button class="btn-glass" onclick="alert('Launching ECHO-X Command Center Interactive Demo...')">
+                  <i class="fa-solid fa-circle-play"></i> Watch Demo
+                </button>
+              </div>
+            </div>
+
+            <div class="hero-illustration">
+              <div class="hud-ring hud-ring-1"></div>
+              <div class="hud-ring hud-ring-2"></div>
+              <div class="police-ai-avatar">
+                <i class="fa-solid fa-user-ninja"></i>
+              </div>
+            </div>
+          </div>
+
+          <!-- Feature Grid -->
+          <div style="margin-top: 60px;">
+            <h3 style="font-size:22px; font-weight:800; text-align:center; margin-bottom:32px;">
+              BUILT FOR MODERN FORENSIC INVESTIGATIONS
+            </h3>
+            <div class="grid-kpi">
+              <div class="glass-card">
+                <i class="fa-solid fa-brain" style="font-size:28px; color:var(--neon-cyan); margin-bottom:12px;"></i>
+                <h4 style="font-size:16px; margin-bottom:8px;">Multi-Agent AI System</h4>
+                <p style="font-size:12px; color:var(--text-muted);">8 specialized AI agents work synchronously analyzing audio, video, OCR, and financial wire transfers.</p>
+              </div>
+              <div class="glass-card">
+                <i class="fa-solid fa-timeline" style="font-size:28px; color:var(--cyber-purple); margin-bottom:12px;"></i>
+                <h4 style="font-size:16px; margin-bottom:8px;">Crime Reconstruction</h4>
+                <p style="font-size:12px; color:var(--text-muted);">Automatically reconstruct precise timeline sequences from scattered GPS, ANPR, and cell pings.</p>
+              </div>
+              <div class="glass-card">
+                <i class="fa-solid fa-chart-line" style="font-size:28px; color:var(--status-green); margin-bottom:12px;"></i>
+                <h4 style="font-size:16px; margin-bottom:8px;">Next Move Prediction</h4>
+                <p style="font-size:12px; color:var(--text-muted);">Predict suspect location and exit routes with up to 92.4% statistical confidence.</p>
+              </div>
+              <div class="glass-card">
+                <i class="fa-solid fa-fingerprint" style="font-size:28px; color:var(--hud-amber); margin-bottom:12px;"></i>
+                <h4 style="font-size:16px; margin-bottom:8px;">Behavioral DNA</h4>
+                <p style="font-size:12px; color:var(--text-muted);">Synthesize digital behavioral profiles based on speech patterns, darknet handles, and crypto wallets.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ================= PAGE 2: LOGIN ================= -->
+        <section id="page-login" class="page-view">
+          <div class="login-container">
+            <div class="glass-card login-card neon-border">
+              <div class="shield-anim">
+                <i class="fa-solid fa-shield-halved"></i>
+              </div>
+              <h2 style="font-size:22px; font-weight:800; margin-bottom:6px;">COMMAND CENTER LOGIN</h2>
+              <p style="font-size:12px; color:var(--text-muted); margin-bottom:24px;">Biometric & Badge Authentication Required</p>
+              
+              <form onsubmit="event.preventDefault(); window.echoApp.navigateTo('dashboard');">
+                <div class="cyber-input-group" style="text-align:left;">
+                  <label>Badge ID / Official Email</label>
+                  <input type="text" class="cyber-input" value="arjun.kumar@police.gov.in" required>
+                </div>
+                <div class="cyber-input-group" style="text-align:left;">
+                  <label>Clearance Password</label>
+                  <input type="password" class="cyber-input" value="••••••••••••" required>
+                </div>
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; font-size:11px;">
+                  <label><input type="checkbox" checked> Remember Badge</label>
+                  <a href="#" style="color:var(--neon-cyan)">Forgot Access?</a>
+                </div>
+                <button type="submit" class="btn-cyber" style="width:100%; justify-content:center;">
+                  <i class="fa-solid fa-fingerprint"></i> Authenticate & Enter Command Center
+                </button>
+              </form>
+            </div>
+          </div>
+        </section>
+
+        <!-- ================= PAGE 3: DASHBOARD ================= -->
+        <section id="page-dashboard" class="page-view active">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:24px;">
+            <div>
+              <h2 style="font-size:24px; font-weight:800;">COMMAND CENTER DASHBOARD</h2>
+              <p style="font-size:12px; color:var(--text-muted);">Active Case: CASE-2026-07 • Cyber Extortion & Syndicate Wiretap</p>
+            </div>
+            <button class="btn-cyber" data-view="new-investigation">
+              <i class="fa-solid fa-plus"></i> Launch New Investigation
+            </button>
+          </div>
+
+          <!-- KPI Cards Grid -->
+          <div class="grid-kpi">
+            <div class="glass-card kpi-card">
+              <div>
+                <div style="font-size:11px; color:var(--text-muted);">TOTAL CASES</div>
+                <div class="kpi-val">24</div>
+              </div>
+              <div class="kpi-icon"><i class="fa-solid fa-folder-closed"></i></div>
+            </div>
+            <div class="glass-card kpi-card">
+              <div>
+                <div style="font-size:11px; color:var(--text-muted);">EVIDENCE FILES</div>
+                <div class="kpi-val">139</div>
+              </div>
+              <div class="kpi-icon"><i class="fa-solid fa-file-shield"></i></div>
+            </div>
+            <div class="glass-card kpi-card">
+              <div>
+                <div style="font-size:11px; color:var(--text-muted);">AI AGENTS</div>
+                <div class="kpi-val" style="color:var(--status-green);">8 ACTIVE</div>
+              </div>
+              <div class="kpi-icon" style="color:var(--status-green); border-color:var(--status-green);"><i class="fa-solid fa-robot"></i></div>
+            </div>
+            <div class="glass-card kpi-card">
+              <div>
+                <div style="font-size:11px; color:var(--text-muted);">CONFIDENCE RATE</div>
+                <div class="kpi-val">92.4%</div>
+              </div>
+              <div class="kpi-icon"><i class="fa-solid fa-bullseye"></i></div>
+            </div>
+          </div>
+
+          <!-- AI Agents Grid & Live Cases -->
+          <div style="display:grid; grid-template-columns: 2fr 1fr; gap:20px; margin-bottom:24px;">
+            <!-- Recent Cases -->
+            <div class="glass-card">
+              <div class="card-header">
+                <div class="card-title"><i class="fa-solid fa-list-check"></i> Recent Active Investigations</div>
+                <button class="btn-glass" style="font-size:11px;">View All Cases</button>
+              </div>
+              <table style="width:100%; border-collapse:collapse; text-align:left; font-size:12px;">
+                <thead>
+                  <tr style="border-bottom:1px solid var(--border-glass); color:var(--text-muted); font-family:var(--font-mono);">
+                    <th style="padding:10px;">ID</th>
+                    <th>TITLE</th>
+                    <th>PRIORITY</th>
+                    <th>INVESTIGATOR</th>
+                    <th>EVIDENCE</th>
+                    <th>CONFIDENCE</th>
+                    <th>ACTION</th>
+                  </tr>
+                </thead>
+                <tbody id="dashboard-recent-cases">
+                  <!-- Populated dynamically -->
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Prediction & Heatmap Panel -->
+            <div class="glass-card neon-border">
+              <div class="card-header">
+                <div class="card-title"><i class="fa-solid fa-location-crosshairs"></i> Next Move Prediction</div>
+              </div>
+              <div style="padding:10px; background:rgba(0,0,0,0.5); border-radius:10px; text-align:center; margin-bottom:16px;">
+                <div style="font-size:11px; color:var(--text-muted);">PREDICTED INTERCEPT ZONE</div>
+                <div style="font-size:18px; font-weight:800; color:var(--neon-cyan); margin:4px 0;">
+                  Railway Station Platform 2
+                </div>
+                <div class="badge-status badge-critical">91.0% Probability • ETA 20:45</div>
+              </div>
+              <div style="font-size:12px; color:var(--text-muted); line-height:1.6;">
+                <i class="fa-solid fa-circle-info" style="color:var(--neon-cyan);"></i> Correlated from wiretap audio recording <code>EVD-102</code> and ANPR camera CCTV match <code>EVD-103</code>.
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ================= PAGE 4: NEW INVESTIGATION ================= -->
+        <section id="page-new-investigation" class="page-view">
+          <div style="max-width:800px; margin:0 auto;">
+            <h2 style="font-size:24px; font-weight:800; margin-bottom:6px;">CREATE NEW INVESTIGATION CASE</h2>
+            <p style="font-size:12px; color:var(--text-muted); margin-bottom:24px;">Initialize AI Multi-Agent Forensics Task Force</p>
+
+            <div class="glass-card">
+              <form id="new-case-form">
+                <div style="display:grid; grid-template-columns: 1fr 1fr; gap:16px;">
+                  <div class="cyber-input-group">
+                    <label>Case Title</label>
+                    <input type="text" id="case-title" class="cyber-input" placeholder="e.g. Operation Cyber Shield" required>
+                  </div>
+                  <div class="cyber-input-group">
+                    <label>Priority Level</label>
+                    <select id="case-priority" class="cyber-input">
+                      <option value="Critical">Critical (Immediate Deployment)</option>
+                      <option value="High">High Priority</option>
+                      <option value="Medium">Medium Priority</option>
+                      <option value="Low">Low Priority</option>
+                    </select>
+                  </div>
+                  <div class="cyber-input-group">
+                    <label>Investigator Officer</label>
+                    <input type="text" id="case-investigator" class="cyber-input" value="Inspector Arjun Kumar" required>
+                  </div>
+                  <div class="cyber-input-group">
+                    <label>Department / Unit</label>
+                    <input type="text" id="case-department" class="cyber-input" value="Cyber Crime Special Task Force" required>
+                  </div>
+                  <div class="cyber-input-group">
+                    <label>Crime Category</label>
+                    <select id="case-crime-type" class="cyber-input">
+                      <option value="Cybercrime">Cybercrime / Ransomware</option>
+                      <option value="Homicide">Homicide & Armed Robbery</option>
+                      <option value="Narcotics">Narcotics Trafficking</option>
+                      <option value="Fraud">Financial Fraud / Crypto</option>
+                      <option value="Harassment">Online Harassment</option>
+                    </select>
+                  </div>
+                  <div class="cyber-input-group">
+                    <label>Primary Location</label>
+                    <input type="text" id="case-location" class="cyber-input" placeholder="e.g. Metro Command / MG Road District">
+                  </div>
+                </div>
+
+                <div class="cyber-input-group">
+                  <label>Investigation Summary / Operational Brief</label>
+                  <textarea id="case-description" class="cyber-input" placeholder="Describe circumstances, seized hardware, target aliases..." required></textarea>
+                </div>
+
+                <div style="display:grid; grid-template-columns: 1fr 1fr; gap:16px;">
+                  <div class="cyber-input-group">
+                    <label>Victim Details</label>
+                    <input type="text" id="case-victim" class="cyber-input" placeholder="Name, Entity, Org">
+                  </div>
+                  <div class="cyber-input-group">
+                    <label>Suspect Details / Aliases</label>
+                    <input type="text" id="case-suspect" class="cyber-input" placeholder="e.g. Alias CipherGhost, Viktor Vance">
+                  </div>
+                </div>
+
+                <div class="cyber-input-group">
+                  <label>Tags (Comma separated)</label>
+                  <input type="text" id="case-tags" class="cyber-input" value="Ransomware, Wiretap, ANPR, Crypto">
+                </div>
+
+                <button type="submit" class="btn-cyber" style="width:100%; justify-content:center; margin-top:10px;">
+                  <i class="fa-solid fa-rocket"></i> Initialize Case & Launch AI Agents
+                </button>
+              </form>
+            </div>
+          </div>
+        </section>
+
+        <!-- ================= PAGE 5: UPLOAD EVIDENCE ================= -->
+        <section id="page-upload-evidence" class="page-view">
+          <h2 style="font-size:24px; font-weight:800; margin-bottom:6px;">EVIDENCE UPLOAD & AI PROCESSING VAULT</h2>
+          <p style="font-size:12px; color:var(--text-muted); margin-bottom:24px;">Drag & Drop Digital Assets for Automatic Multi-Agent Processing</p>
+
+          <div class="glass-card" style="margin-bottom:24px;">
+            <div id="upload-dropzone" class="dropzone">
+              <i class="fa-solid fa-cloud-arrow-up" style="font-size:48px; color:var(--neon-cyan); margin-bottom:14px;"></i>
+              <h3 style="font-size:18px; margin-bottom:6px;">Drag & Drop Digital Evidence Files Here</h3>
+              <p style="font-size:12px; color:var(--text-muted); margin-bottom:16px;">
+                Supports Images (JPG, PNG), Video (MP4, MOV), Audio (MP3, WAV), Documents (PDF), Chat Logs, GPS JSON
+              </p>
+              <button class="btn-cyber" type="button">Browse Files</button>
+              <input type="file" id="evidence-file-input" style="display:none;">
+            </div>
+
+            <!-- Upload Progress UI -->
+            <div style="margin-top:20px;">
+              <div id="upload-progress-text" style="font-size:12px; font-family:var(--font-mono); color:var(--neon-cyan);">
+                Ready for file ingestion...
+              </div>
+              <div class="progress-bar-wrap">
+                <div id="upload-progress-fill" class="progress-bar-fill"></div>
+              </div>
+              <div id="upload-ocr-status" style="font-size:11px; color:var(--text-muted); margin-top:6px;">
+                Status: Standby
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ================= PAGE 6: INVESTIGATION CENTER ================= -->
+        <section id="page-investigation-center" class="page-view">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+            <div>
+              <h2 style="font-size:24px; font-weight:800;">INVESTIGATION CENTER WORKSPACE</h2>
+              <p style="font-size:12px; color:var(--text-muted);">Tactical Evidence Board for CASE-2026-07</p>
+            </div>
+            <button class="btn-cyber" data-view="ai-reasoning">
+              <i class="fa-solid fa-brain"></i> Open AI Reasoning Engine
+            </button>
+          </div>
+
+          <!-- Evidence Board Grid -->
+          <div id="evidence-board-grid" class="evidence-grid">
+            <!-- Populated dynamically via app.js -->
+          </div>
+        </section>
+
+        <!-- ================= PAGE 7: AI REASONING ================= -->
+        <section id="page-ai-reasoning" class="page-view">
+          <h2 style="font-size:24px; font-weight:800; margin-bottom:6px;">AI REASONING & DEDUCTION PANEL</h2>
+          <p style="font-size:12px; color:var(--text-muted); margin-bottom:24px;">Holographic Neural Radar & Automated Investigation Inference</p>
+
+          <div style="display:grid; grid-template-columns: 1fr 1fr; gap:20px;">
+            <!-- Radar Visualizer -->
+            <div class="glass-card neon-border">
+              <div class="card-header">
+                <div class="card-title"><i class="fa-solid fa-radar"></i> Neural AI Radar Core</div>
+                <span class="badge-status badge-active">92.4% CONFIDENCE</span>
+              </div>
+              <canvas id="brain-canvas"></canvas>
+            </div>
+
+            <!-- Deductive Steps -->
+            <div class="glass-card">
+              <div class="card-header">
+                <div class="card-title"><i class="fa-solid fa-timeline"></i> Multi-Agent Deduction Flow</div>
+              </div>
+              <div style="display:flex; flex-direction:column; gap:12px;">
+                <div style="padding:10px; background:rgba(255,255,255,0.03); border-radius:8px; border-left:3px solid var(--neon-cyan);">
+                  <div style="font-size:11px; font-family:var(--font-mono); color:var(--neon-cyan);">STEP 1 • OCR AGENT</div>
+                  <div style="font-size:13px; font-weight:600;">Extracted Burner Phone Number</div>
+                  <div style="font-size:11px; color:var(--text-muted);">Matched +91 98765 43210 from chat export <code>EVD-101</code>.</div>
+                </div>
+                <div style="padding:10px; background:rgba(255,255,255,0.03); border-radius:8px; border-left:3px solid var(--cyber-purple);">
+                  <div style="font-size:11px; font-family:var(--font-mono); color:var(--cyber-purple);">STEP 2 • VISION AGENT</div>
+                  <div style="font-size:13px; font-weight:600;">89.4% Facial Match</div>
+                  <div style="font-size:11px; color:var(--text-muted);">CCTV camera flagged suspect Viktor Vance fleeing in Black Audi.</div>
+                </div>
+                <div style="padding:10px; background:rgba(255,255,255,0.03); border-radius:8px; border-left:3px solid var(--status-green);">
+                  <div style="font-size:11px; font-family:var(--font-mono); color:var(--status-green);">STEP 3 • AUDIO AGENT</div>
+                  <div style="font-size:13px; font-weight:600;">Location Extraction from Wiretap</div>
+                  <div style="font-size:11px; color:var(--text-muted);">Speech transcript extracted meeting spot 'Railway Station Platform 2'.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ================= PAGE 8: EVIDENCE GRAPH ================= -->
+        <section id="page-evidence-graph" class="page-view">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+            <div>
+              <h2 style="font-size:24px; font-weight:800;">EVIDENCE GALAXY NETWORK GRAPH</h2>
+              <p style="font-size:12px; color:var(--text-muted);">Interactive Entity Relationships, Phone Links, Crypto Wallets & Locations</p>
+            </div>
+          </div>
+
+          <div style="display:grid; grid-template-columns: 3fr 1fr; gap:16px;">
+            <!-- Interactive Canvas -->
+            <div class="glass-card" style="padding:0; overflow:hidden;">
+              <canvas id="graph-canvas"></canvas>
+            </div>
+
+            <!-- Inspect Sidebar Panel -->
+            <div class="glass-card neon-border">
+              <div class="card-header">
+                <div class="card-title"><i class="fa-solid fa-circle-info"></i> Node Inspector</div>
+              </div>
+              <h3 id="graph-node-title" style="font-size:16px; margin-bottom:4px;">Select Node</h3>
+              <div id="graph-node-category" style="font-size:12px; font-family:var(--font-mono); margin-bottom:16px; color:var(--neon-cyan);">
+                Click any node on graph to view intel details
+              </div>
+              <div id="graph-node-details" style="font-size:12px; color:var(--text-muted); line-height:1.6;">
+                Node attributes, connected burner phones, vehicles, and threat scores will display here.
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ================= PAGE 9: TIMELINE ================= -->
+        <section id="page-timeline" class="page-view">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+            <div>
+              <h2 style="font-size:24px; font-weight:800;">CHRONOLOGICAL EVENT TIMELINE</h2>
+              <p style="font-size:12px; color:var(--text-muted);">AI Reconstructed Sequence of Phone Activity, CCTV, Bank Wire & GPS</p>
+            </div>
+            <div style="display:flex; gap:8px;">
+              <button class="btn-glass" onclick="window.timelineEngine.setFilter('all')">All</button>
+              <button class="btn-glass" onclick="window.timelineEngine.setFilter('phone')">Phone</button>
+              <button class="btn-glass" onclick="window.timelineEngine.setFilter('camera')">CCTV</button>
+              <button class="btn-glass" onclick="window.timelineEngine.setFilter('gps')">GPS</button>
+            </div>
+          </div>
+
+          <div class="timeline-track" id="timeline-events-container">
+            <!-- Populated dynamically via timeline.js -->
+          </div>
+        </section>
+
+        <!-- ================= PAGE 10: REPORTS ================= -->
+        <section id="page-reports" class="page-view">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+            <div>
+              <h2 style="font-size:24px; font-weight:800;">INVESTIGATION EXECUTIVE REPORT</h2>
+              <p style="font-size:12px; color:var(--text-muted);">Automated Official PDF Legal Summary</p>
+            </div>
+            <button class="btn-cyber" onclick="window.print();">
+              <i class="fa-solid fa-print"></i> Export / Print PDF
+            </button>
+          </div>
+
+          <div class="report-paper">
+            <div style="display:flex; justify-content:space-between; border-bottom:2px solid var(--border-neon); padding-bottom:16px; margin-bottom:24px;">
+              <div>
+                <h2 style="color:var(--neon-cyan); font-size:20px;">ECHO-X DIGITAL FORENSICS REPORT</h2>
+                <div style="font-size:12px; color:var(--text-muted);">CONFIDENTIAL • FOR OFFICIAL LAW ENFORCEMENT USE ONLY</div>
+              </div>
+              <div style="text-align:right; font-family:var(--font-mono); font-size:11px;">
+                <div>REPORT ID: RPT-2026-08-001</div>
+                <div>DATE: 2026-08-06</div>
+              </div>
+            </div>
+
+            <h3 style="font-size:16px; margin-bottom:8px;">1. EXECUTIVE SUMMARY</h3>
+            <p style="font-size:13px; color:var(--text-muted); line-height:1.6; margin-bottom:20px;">
+              Target case CASE-2026-07 involves ransom threats and ransomware deployment against critical tech infrastructure. 139 digital evidence files (chat exports, audio wiretaps, CCTV videos, bank statements) were processed by the ECHO-X multi-agent grid. Primary suspect identified as Viktor Vance (Alias 'CipherGhost').
+            </p>
+
+            <h3 style="font-size:16px; margin-bottom:8px;">2. KEY FINDINGS & CONFIDENCE SCORES</h3>
+            <ul style="font-size:13px; color:var(--text-muted); line-height:1.8; margin-left:20px; margin-bottom:20px;">
+              <li><strong>Burner Number Correlation:</strong> +91 98765 43210 linked to suspect (96% Confidence).</li>
+              <li><strong>Voiceprint Match:</strong> Audio wiretap <code>EVD-102</code> matched suspect voice frequencies (94.2% Confidence).</li>
+              <li><strong>Location Intercept:</strong> Suspect predicted at Railway Station Platform 2 at 20:45 (91% Confidence).</li>
+            </ul>
+
+            <div style="margin-top:40px; border-top:1px solid var(--border-glass); padding-top:16px; display:flex; justify-content:space-between; font-size:11px; color:var(--text-dim);">
+              <span>APPROVED BY: Inspector Arjun Kumar</span>
+              <span>VERIFIED BY: ECHO-X AI ENGINE v2.4</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- ================= PAGE 11: ALERTS ================= -->
+        <section id="page-alerts" class="page-view">
+          <h2 style="font-size:24px; font-weight:800; margin-bottom:6px;">LIVE THREAT & AI ALERTS STREAM</h2>
+          <p style="font-size:12px; color:var(--text-muted); margin-bottom:24px;">Real-Time System Notifications & Suspect Proximity Warnings</p>
+
+          <div id="alerts-feed-container" style="max-width:800px;">
+            <!-- Dynamic alerts -->
+          </div>
+        </section>
+
+        <!-- ================= PAGE 12: SETTINGS ================= -->
+        <section id="page-settings" class="page-view">
+          <h2 style="font-size:24px; font-weight:800; margin-bottom:6px;">COMMAND CENTER SETTINGS</h2>
+          <p style="font-size:12px; color:var(--text-muted); margin-bottom:24px;">Customize Theme, Cyber Encryption & API Integration</p>
+
+          <div style="max-width:700px;">
+            <div class="glass-card" style="margin-bottom:20px;">
+              <h3 style="font-size:16px; margin-bottom:16px;"><i class="fa-solid fa-palette" style="color:var(--neon-cyan);"></i> UI Theme Customizer</h3>
+              <div class="cyber-input-group">
+                <label>Select Cyber Theme</label>
+                <select id="setting-theme-select" class="cyber-input">
+                  <option value="cyan">Dark Cyber Cyan (Default)</option>
+                  <option value="matrix">Matrix Neon Green</option>
+                  <option value="amber">Tactical HUD Amber</option>
+                  <option value="purple">Synthwave Purple</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="glass-card">
+              <h3 style="font-size:16px; margin-bottom:16px;"><i class="fa-solid fa-key" style="color:var(--cyber-purple);"></i> Security & API Credentials</h3>
+              <div class="cyber-input-group">
+                <label>ECHO-X Neural Engine API Key</label>
+                <input type="password" class="cyber-input" value="echox_live_key_99827364510009">
+              </div>
+              <div class="cyber-input-group">
+                <label>Encryption Engine Mode</label>
+                <select class="cyber-input">
+                  <option>AES-256 GCM Hardware Encrypted</option>
+                  <option>Post-Quantum Kyber Lattice</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- Global Floating AI Assistant Widget -->
+  <div id="floating-assistant-widget" class="floating-assistant">
+    <div class="assistant-header">
+      <div style="display:flex; align-items:center; gap:10px;">
+        <i class="fa-solid fa-robot" style="color:var(--neon-cyan);"></i>
+        <strong style="font-size:13px;">ECHO-X AI CO-PILOT</strong>
+      </div>
+      <button id="ai-assistant-toggle" style="background:none; border:none; color:#fff; cursor:pointer;">
+        <i class="fa-solid fa-minus"></i>
+      </button>
+    </div>
+    <div id="ai-chat-body" class="assistant-body">
+      <div class="chat-bubble ai">
+        Officer, I am ECHO-X Multi-Agent Co-Pilot. Ask me any question regarding suspects, evidence correlations, or predicted locations in CASE-2026-07.
+      </div>
+    </div>
+    <div class="assistant-input">
+      <input type="text" id="ai-chat-input" class="cyber-input" placeholder="Ask AI co-pilot..." style="height:36px; font-size:12px;">
+      <button id="ai-chat-send" class="btn-cyber" style="padding:0 14px; height:36px;"><i class="fa-solid fa-paper-plane"></i></button>
+    </div>
+  </div>
+
+  <!-- Core Scripts -->
+  <script src="/static/js/particles.js"></script>
+  <script src="/static/js/graph.js"></script>
+  <script src="/static/js/ai_brain.js"></script>
+  <script src="/static/js/timeline.js"></script>
+  <script src="/static/js/app.js"></script>
+</body>
+</html>
